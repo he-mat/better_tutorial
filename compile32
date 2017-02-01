@@ -1,10 +1,11 @@
 #!/bin/bash
 
-usage="Usage: $(basename $0) [-dnh] [-f filename]\n
+usage="Usage: $(basename $0) [-dnh] filename\n
         -d		delete the (temporary) header file\n
         -n		don't put '32' at end of program name\n
         -h		display help (this screen)\n\n
-        example:	"$(basename $0)" -d main"
+        example:	"$(basename $0)" -d main\n
+	notice the filename without extension!"
 
 errmsg="You have to specify a file!"
 
