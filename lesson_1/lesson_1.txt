@@ -1,0 +1,47 @@
+HELLO WORLD!
+writing our first program:
+firstly we will create a variable called msg in our .data section and assign it the string we want to output,
+in this case "Hello, World!". In our .text seciton we tell the kernel where to begin execution by providing it
+with global label _start: to denote the programs entry point.
+We will be using the system call (again, 32bit system call table can be found here: http://syscalls.kernelgrok.com/)
+sys_write to output our message to the console window. This function is assigned OPCODE 4 in the Linux System Call
+Table. This means that EAX has to contain a 4 in order for the kernel to execute the correct function.
+The function also takes three arguments which are sequentially loaded into EBX, ECX, EDX before requesting
+a software interrupt which will perform the task.
+
+the arguments are passed as follows:
+ EBX will be loaded with the file we want to write to - in this case STDOUT
+ ECX will be loaded with the address of our variable created in the .data section (this needs to be a pointer)
+ EDX will be loaded with the length (in bytes) of our string
+
+the datatype and meaning can be found in the functions definition in the table provided above (in the form of a link)
+
+We compile, link and run the program using the commands
+ $ nasm -f elf lesson_1.asm
+ $ ld -m elf_i386 lesson_1.o -o lesson_1
+or we could use the compile script that I provided with this package:
+ $ compile32 lesson_1 [-y]
+
+We run the program with ./lesson_1
+
+-------------------
+; Hello World Program
+ 
+SECTION .data
+msg     db      'Hello, World!', 0Ah ; assign msg variable with your message string
+ 
+SECTION .text
+global  _start
+ 
+_start:
+ 
+    mov     eax, 4      ; invoke SYS_WRITE (kernel OPCODE 4)
+    mov     ebx, 1      ; write to the STDOUT file
+    mov     ecx, msg    ; move the memory address of our message string into ecx
+    mov     edx, 14     ; number of bytes to write - one for each letter plus 0Ah (line feed character)
+    int     80h		; perform the syscall
+-------------------
+
+output:
+Hello World!
+Segmentation fault

@@ -1,0 +1,67 @@
+CALCULATING STRING LENGTH
+
+Why do we need to calculate the length of a string?
+Wekk sys_write requires that we pass it a pointer to the string we want to output in memory and the length
+in bytes we want to print out. If we were to modify our message string we would have to update the length in bytes
+that we pass to sys_write as well, otherwise it will not print correctly.
+
+You can see what I mean using the program in lesson_2. Modify the message string to say "Hello, brave new world!",
+then compile, link and run the new program. The output will be "Hello, brave n" (the first 14 characters) because
+we are still only passing 14 bytes to sys_write as its length. It will be particularly necessary when we want to
+print out user input. As we won't know the length of the data when we compile our program, we will need a way to
+calculate the length at runtime in order to successfully print it out.
+
+To calculate the length of the string we will use a technique called pointer arithmetic. Two registers are
+initialized pointing to the same address in memory. One register (in this case EAX) will be incremented forward
+one byte for each character in the output string until we reach the end of the string. The original pounter will
+then be subtracted from EAX. This is effectively like subtraction between two arrays and the result yields the
+number of elements between the two addresses. This result is then passed to sys_write replacing our hard coded
+count.
+
+The CMP instruction compares the left hand side against the right hand side and sets a number of flags that are
+used for program flow. The flag we're checking against is the ZF or "Zero Flag". When the byte that EAX points to
+is equal to zero the ZF flag is set. We then use the JZ instruction to jump, if the ZF flag is set, to the point
+in our program labeled 'finished'. This is to break out of the nextchar loop and continue executing the rest of the
+program.
+
+(In case you didn't notice: the capitalization of instruction keywords doesn't matter in NASM, as well as the order
+in which you fill the registers. It just matters that the registers are filled with correct values when you do a
+syscall.)
+
+-------------------
+
+SECTION .data
+msg	db	"Hello, brave new world!", 0Ah	; we can modify this now without having to
+						; update anywhere else in the program
+ 
+SECTION .text
+global  _start
+ 
+_start:
+ 
+ mov	ebx, msg	; move the address of our message string into EBX
+ mov	eax, ebx	; move the address in EBX into EAX as well (Both now point to the same segment in memory)
+ 
+nextchar:
+ cmp	byte [eax], 0	; compare the byte pointed to by EAX at this address against zero
+			; (Zero is an end of string delimiter)
+ jz	finished	; jump (if the zero flagged has been set) to the point in the code labeled 'finished'
+ inc	eax		; increment the address in EAX by one byte (if the zero flagged has NOT been set)
+ jmp	nextchar	; jump to the point in the code labeled 'nextchar'
+ 
+finished:
+ sub	eax, ebx	; subtract the address in EBX from the address in EAX
+			; remember both registers started pointing to the same address
+			; but EAX has been incremented one byte for each character in the message string
+			; when you subtract one memory address from another of the same type
+			; the result is number of segments between them - in this case the number of bytes
+ 
+ mov	edx, eax	; EAX now equals the number of bytes in our string
+ mov	ecx, msg	; the rest of the code should be familiar now
+ mov	ebx, 1
+ mov	eax, 4
+ int 80h
+
+ mov	ebx, 0
+ mov	eax, 1
+ int 80h

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+    echo "no argument given";
+    exit 1;
+fi
+
+if [ $1 = "--help" ]; then
+    clear;
+    echo "this script compiles assembly files in the x86 format using nasm"
+    echo "[--help] - displays this screen"
+    echo " usage: compile [filename] [-y]"
+    echo " -y		delete header file (temporary)"
+    echo "example: compile main -y"
+    exit 1;
+fi
+
+MYPWD=${PWD}
+
+if [ -f "$MYPWD/$1.asm" ]; then
+    nasm -f elf -o "$MYPWD/$1.o" "$MYPWD/$1.asm";
+    if [ '$1 | grep -o ..$' == '32' ]; then
+	ld -m elf_i386 -o "$MYPWD/$1" "$MYPWD/$1.o";
+    else
+	ld -m elf_i386 -o "$MYPWD/$1"32 "$MYPWD/$1.o";
+    fi
+fi
+if [ $# -eq 2 ]; then
+    if [ $2 = "-y" ]; then
+	\rm -f "$MYPWD/$1.o";
+    else
+	echo "wrong input"
+    fi
+fi
+if [ $# -gt 2 ]; then
+    echo "too many arguments";
+fi

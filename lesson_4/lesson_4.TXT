@@ -1,0 +1,5 @@
+SUBROUTINES
+
+Subroutines are functions. They are reusable pieces of code that can be called by your program to perform
+various repeatable tasks. Subroutines are declared using labels just like we've used before (eg. _start:),
+however we don't use the JMP instruction to get to them - instead we use a new instruction CALL.
