@@ -1,0 +1,15 @@
+CHANGELOG:
+
+01.02
+-started using the CHANGELOG
+-completed lesson_4
+-updated README.md
+-initial release to github
+-renamed README.TXT -> first_notes.TXT
+-updated compile32 to better handle arguments, use -h for help
+
+
+
+TODO:
+-update compile like compile32
+-write lesson 5
