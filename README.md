@@ -42,3 +42,4 @@ I wanted to create this project because I wanted to learn Assembly and thought t
 ## Installation
 
 Just copy this project on you PC and start reading the notes. After about half of it you can start doing the lessons.
+You can do this by either clicking the green button at the top right hand side and downloading as a zip or directly clone the project with the ```bash git clone https://github.com/he-mat/better_tutorial.git``` command into your working directory.
