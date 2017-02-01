@@ -1,37 +1,55 @@
 #!/bin/bash
 
-if [ $# -lt 1 ]; then
-    echo "no argument given";
-    exit 1;
-fi
+usage="Usage: $(basename $0) [-dnh] [-f filename]\n
+        -d		delete the (temporary) header file\n
+        -n		don't put '32' at end of program name\n
+        -h		display help (this screen)\n\n
+        example:	"$(basename $0)" -d main"
 
-if [ $1 = "--help" ]; then
-    clear;
-    echo "this script compiles assembly files in the x86 format using nasm"
-    echo "[--help] - displays this screen"
-    echo " usage: compile [filename] [-y]"
-    echo " -y		delete header file (temporary)"
-    echo "example: compile main -y"
-    exit 1;
-fi
+errmsg="You have to specify a file!"
 
 MYPWD=${PWD}
 
-if [ -f "$MYPWD/$1.asm" ]; then
-    nasm -f elf -o "$MYPWD/$1.o" "$MYPWD/$1.asm";
-    if [ '$1 | grep -o ..$' == '32' ]; then
-	ld -m elf_i386 -o "$MYPWD/$1" "$MYPWD/$1.o";
+dswitch=false
+nswitch=false
+hswitch=false
+exitcode=0
+
+while getopts "dnh" option; do
+ case $option in
+  d)
+   dswitch=true
+   ;;
+  n)
+   nswitch=true
+   ;;
+  h)
+   hswitch=true
+   ;;
+  \?)
+   echo "invalid option -$OPTARG"
+   hswitch=true
+   exitcode=1
+ esac
+done
+
+shift $((OPTIND - 1))
+filename="$1"
+
+if [ "$hswitch" = true ]; then
+	echo -e $usage
+	exit $exitcode
+fi
+
+if [ -e "$filename.asm" ]; then
+	nasm -f elf -o "$MYPWD/$filename.o" "$MYPWD/$filename.asm";
+	if [ '$1 | grep -o ..$' == '32' ] || [ "$nswitch" = true ]; then
+        ld -m elf_i386 -o "$MYPWD/$filename" "$MYPWD/$filename.o";
     else
-	ld -m elf_i386 -o "$MYPWD/$1"32 "$MYPWD/$1.o";
+        ld -m elf_i386 -o "$MYPWD/$filename"32 "$MYPWD/$filename.o";
     fi
 fi
-if [ $# -eq 2 ]; then
-    if [ $2 = "-y" ]; then
-	\rm -f "$MYPWD/$1.o";
-    else
-	echo "wrong input"
-    fi
-fi
-if [ $# -gt 2 ]; then
-    echo "too many arguments";
+
+if [ "$dswitch" = true ]; then
+	rm -rf "$MYPWD/$filename.o";
 fi
