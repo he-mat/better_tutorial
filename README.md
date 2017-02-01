@@ -12,26 +12,27 @@ programming with NASM yourself or continue reading the advanced notes.
 
 
 ## Code Example
->; Hello World Program
->
->SECTION .data
->msg     db      'Hello World!', 0Ah     ; assign msg variable with your message string
->
->SECTION .text
->global  _start
->
->_start:
->
-> mov   eax, 4    ; invoke SYS_WRITE (kernel opcode 4)
-> mov   ebx, 1    ; write to the STDOUT file
-> mov   ecx, msg  ; move the memory address of our message string into ecx
-> mov   edx, 13   ; number of bytes to write - one for each letter plus 0Ah (line feed character)
-> int   80h
-> 
-> mov   eax, 1    ; invoke SYS_EXIT (kernel OPCODE 1)
-> mov   ebx, 0    ; return 0 status on exit - 'No Errors'
-> int   80h
+```assembly
+; Hello World Program
 
+SECTION .data
+msg     db      'Hello World!', 0Ah     ; assign msg variable with your message string
+
+SECTION .text
+global  _start
+
+_start:
+
+mov   eax, 4    ; invoke SYS_WRITE (kernel opcode 4)
+mov   ebx, 1    ; write to the STDOUT file
+mov   ecx, msg  ; move the memory address of our message string into ecx
+mov   edx, 13   ; number of bytes to write - one for each letter plus 0Ah (line feed character)
+int   80h
+
+mov   eax, 1    ; invoke SYS_EXIT (kernel OPCODE 1)
+mov   ebx, 0    ; return 0 status on exit - 'No Errors'
+int   80h
+```
 
 ## Motivation
 
