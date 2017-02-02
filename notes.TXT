@@ -1,4 +1,5 @@
-this is a tutorial on how to write 32bit (x86) NASM Assembly code, compile and run it
+this is a tutorial on how to write 32bit (x86) NASM Assembly code, compile and run it aimed at people who have some
+knowledge of programming but have never used assembly before.
 
 first make sure you have nasm installed in your linux machine!
  $ sudo apt-get install nasm (for debian based systems)
