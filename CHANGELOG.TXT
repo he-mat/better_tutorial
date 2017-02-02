@@ -16,7 +16,7 @@ CHANGELOG:
 ->expected output as comment at the bottom of .asm file
 -wrote lesson 6
 -wrote lesson 7
+-updated compile script to work like compile32, use compile -h for help
 
 TODO:
--update compile like compile32
 -write the next lesson
