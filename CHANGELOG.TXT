@@ -15,7 +15,7 @@ CHANGELOG:
 ->now no more code in the .TXT files
 ->expected output as comment at the bottom of .asm file
 -wrote lesson 6
-
+-wrote lesson 7
 
 TODO:
 -update compile like compile32
