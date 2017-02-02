@@ -9,7 +9,13 @@ CHANGELOG:
 -updated compile32 to better handle arguments, use -h for help
 
 
+02.02
+-wrote lesson 5
+-changed the layout
+->now no more code in the .TXT files
+->expected output as comment at the bottom of .asm file
+
 
 TODO:
 -update compile like compile32
--write lesson 5
+-write the next lesson
