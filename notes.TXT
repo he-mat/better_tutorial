@@ -6,11 +6,17 @@ first make sure you have nasm installed in your linux machine!
 
 nasm files have the file extension .asm
 
-to compile your code just run the "compile" program, use ./compile --help for first use
-    for convinience I have created the directory /bin/scripts and put the compile file there
-    then added the directory to my PATH in the bashrc file (google is your friend)
-    now I only need to write compile filename [-y] to compile with nasm
-    (the compile32 program automatically names your program "filename32", if you don't want that use the switch -n)
+to compile your code just run the "compile" script, use ./compile32 -h for first use
+    the compile script is for x64_86 code, the compile32 script for x86 code
+    for convinience I advise you to create the directory /bin/scripts and put the compile scripts there
+    then add the directory /bin/scripts to your PATH in the bashrc file
+    to do that, add this to your ~/.bashrc file:
+
+if [ -d "/bin/scripts" ]; then
+  PATH="$PATH:/bin/scripts/"
+fi
+
+    now you only need to write 'compile32 filename' to compile with nasm (use 'compile32 -h' for help)
 
     or just use this code to compile manually
      $ nasm -f elf64 -o filename.o filename.asm
@@ -34,6 +40,7 @@ sections - every assembly program consists of these three sections (even if you 
 
 get 64bit syscalls here:
 http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
+
 important registers when using 64bit syntax:
  rax - temporary register, when using a syscall rax must contain a syscall number
  rdi - used to pass 1st argument to function

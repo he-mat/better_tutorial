@@ -20,7 +20,8 @@ We compile, link and run the program using the commands
  $ nasm -f elf lesson_1.asm
  $ ld -m elf_i386 lesson_1.o -o lesson_1
 or we could use the compile script that I provided with this package:
- $ compile32 lesson_1 [-y]
+ $ compile32 [-dnh] lesson_1
+ (use 'compile32 -h' for help)
 
 We run the program with ./lesson_1
 
