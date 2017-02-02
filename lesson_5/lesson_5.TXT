@@ -1,0 +1,100 @@
+EXTERNAL INCLUDE FILES
+
+External include files allow us to move code from our program and put it into separate files. This technique
+is useful for writing clean, easy to maintain programs. Reusable bits of code can be written as subroutines
+and stored in separate files called libraries. When you need a piece of logic you can include the file in your
+program and use it as of they are part of the same file.
+
+In this lesson we will move our string length calculating subroutine into an external file. We will also make our
+string printing logic and program exit logic a subroutine and we will move them into this external file.
+Once it's completed our actual program will be clean and easier to read.
+
+We can then declare another message variable and call our print function twice in order to demonstrate how we can
+reuse code.
+
+NOTE:	The functions.asm file will not be shown in these lesson files unless changed, though they still remain part
+	of the program.
+
+NOTE:	I will not include the code in these lesson files anymore, the source files are present in the respective
+	directories. Also I'm going to include expected output from now on.
+
+functions.asm
+-------------------
+
+;------------------
+; int slen(String message)
+; String length calculation function
+slen:
+ push	ebx
+ mov	ebx, eax
+
+nextchar:
+ cmp	byte [eax], 0
+ jz	finished
+ inc	eax
+ jmp	nextchar
+
+finished:
+ sub	eax, ebx
+ pop	ebx
+ ret
+
+;------------------
+; void sprint(String message)
+; String printing function
+sprint:
+ push	edx
+ push	ecx
+ push	ebx
+ push	eax
+ call	slen
+
+ mov	edx, eax
+ pop	eax
+
+ mov	ecx, eax
+ mov	ebx, 1
+ mov	eax, 4
+ int	80h
+
+ pop	ebx
+ pop	ecx
+ pop	edx
+ ret
+
+;------------------
+; void exit()
+; exit program with no errors
+quit:
+ mov	eax, 1
+ mov	ebx, 0
+ int	80h
+ ret
+
+
+lesson_5.asm
+-------------------
+%include	'functions.asm'				; include our external file
+
+SECTION .data
+ msg1	db	'Hello, brave new world!', 0Ah		; our first message string
+ msg2	db	'This is how we recycle in NASM.', 0Ah	; our second message string
+
+SECTION .text
+ global _start
+
+_start:
+ mov	eax, msg1	; move the address of our first message string into EAX
+ call	sprint		; call our string printing function
+
+ mov	eax, msg2	; move the address of our message string into EAX
+ call	sprint		; call our string printing function
+
+ call	quit		; call our quit function
+
+; expected output:
+; Hello, brave new world!
+; This is how we recycle in NASM.
+; This is how we recycle in NASM.
+;
+; our second message is outputted twice. We will fix this in the next lesson.
