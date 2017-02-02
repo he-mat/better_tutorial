@@ -43,3 +43,18 @@ I wanted to create this project because I wanted to learn Assembly and thought t
 
 Just copy this project on you PC and start reading the notes. After about half of it you can start doing the lessons.
 You can do this by either clicking the green button at the top right hand side and downloading as a zip or directly clone the project with the ```git clone https://github.com/he-mat/better_tutorial.git``` command into your working directory.
+If you want to compile and link your programs with ease, follow these steps:
+- create the directory /bin/scripts
+- copy both files compile and compile32 into the newly created directory
+- add the directory to your PATH by adding the following lines add the bottom
+```bash
+if [ -d "/bin/scripts" ]; then
+  PATH="$PATH:/bin/scripts/"
+fi
+```
+- enter 
+```bash
+$ exec bash
+```
+- done!
+Now you can use the two scripts from anywhere! Just enter compile -h for first time help.
