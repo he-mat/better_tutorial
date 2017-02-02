@@ -1,0 +1,15 @@
+NULL TERMINATING BYTES
+
+Ok so why did our second message print twice when we only called our sprint function on msg2 once?
+Well actually it did only print one. Your can see what I mean if you comment out our second call to sprint.
+The output will be both of our message strings.
+
+But how is this possible?
+
+What is happening is we werent't properly terminating our strings. In assembly, variables are stores one after
+another in memory so te last byte of our msg1 variable is right next to the first byte of our msg2 variable. We
+know our string length calculation is looking for a zero byte so unless our msg2 variable starts with a zero byte
+it keeps counting as if it's the same string (and as far as assembly is concerned it is the same string). So we
+need to put a zero byte or 0h after our strings to let assembly know where to stop counting.
+
+NOTE: In programming a 0h denotes a NULL byte and a NULL byte after a string tells asssembly where it end in memory
