@@ -1,0 +1,29 @@
+USER INPUT
+
+So far we've used the .text and .data section so now it's time to introduce the .bss section. BSS stands for 
+BLOCK STARTED BY SYMBOL. It is an area in our program that is used to reserve space in memory for uninitialized
+variables. We will use it to reserve some space in memory to hold our user input since we don't know how many bytes
+we'll need to store.
+
+The syntax to declare variables is as follows:
+
+SECTION .bss
+variableName1:      RESB    1       ; reserve space for 1 byte
+variableName2:      RESW    1       ; reserve space for 1 word
+variableName3:      RESD    1       ; reserve space for 1 double word
+variableName4:      RESQ    1       ; reserve space for 1 double precision float (quad word)
+variableName5:      REST    1       ; reserve space for 1 extended precision float
+
+We will be using the system call sys_read to receive and process input from the user. This function is assigned
+OPCODE 3 in the Linux System Call Table. Just like sys_write this function also takes 3 arguments which will be
+loaded into EBX, ECX and EDX before requesting a software interrupt that will call the function.
+
+The arguments passed are as follows:
+ EBX will be loaded with the file we want to write to - in this case STDIN
+ ECX will be loaded with the address of our variable created in the .bss section
+ EDX will be loaded with the maximum length (in bytes) of our space in memory
+
+As always the datatype and meaning of the arguments can be found in the functions definition.
+
+When sys_read detects a linefeed, control returns to the program and the users unput is located at the memory
+address you passed in ECX.
