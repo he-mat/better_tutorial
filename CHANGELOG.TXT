@@ -18,5 +18,9 @@ CHANGELOG:
 -wrote lesson 7
 -updated compile script to work like compile32, use compile -h for help
 
+03.02
+-wrote lesson 8
+-updated notes for better readability (now contains whole senteces, and less typos!)
+
 TODO:
 -write the next lesson
