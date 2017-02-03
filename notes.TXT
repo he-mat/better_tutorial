@@ -2,42 +2,56 @@ this is a tutorial on how to write 32bit (x86) NASM Assembly code, compile and r
 knowledge of programming but have never used assembly before.
 
 first make sure you have nasm installed in your linux machine!
- $ sudo apt-get install nasm (for debian based systems)
- $ sudo dnf install nasm (for fedora23 or newer)
+ apt-get for debian/Ubuntu/mint :
+ $ sudo apt-get install nasm
+ dnf for fedora(18 and newer)/CentOS/RHEL :
+ $ sudo dnf install nasm
+ pacman for ArchLinux :
+ $ sudo pacman -S nasm
 
-nasm files have the file extension .asm
+Writing a NASM assembly program is not that difficult. You just create a new file with the extension '.asm', write
+your code with your favorite text editor and compile and link in the end. If you name your .asm file like you want
+your program to be called you won't have to rename it later.
 
-to compile your code just run the "compile" script, use ./compile32 -h for first use
-    the compile script is for x64_86 code, the compile32 script for x86 code
-    for convinience I advise you to create the directory /bin/scripts and put the compile scripts there
-    then add the directory /bin/scripts to your PATH in the bashrc file
-    to do that, add this to your ~/.bashrc file:
+For ease of use I have provided two scripts, compile and compile32. Both will compile and link your .asm files
+for x64_86 or x86 architecture automatically, you will just have to provide a filename. Use ./compile -h for help.
 
-if [ -d "/bin/scripts" ]; then
-  PATH="$PATH:/bin/scripts/"
-fi
+ for convinience I advise you to create the directory /bin/scripts and put the compile scripts there
+ then add the directory /bin/scripts to your PATH in the bashrc file
+ to do that, add this to your ~/.bashrc file:
 
-    now you only need to write 'compile32 filename' to compile with nasm (use 'compile32 -h' for help)
+	if [ -d "/bin/scripts" ]; then
+	  PATH="$PATH:/bin/scripts/"
+	fi
 
-    or just use this code to compile manually
-     $ nasm -f elf64 -o filename.o filename.asm
-     $ ld -o filename filename.o
+If you don't want to use my scripts you can just manually enter these commands to firstly compile your file and link
+it afterwards.
+ $ nasm -f elf64 -o filename.o filename.asm
+ $ ld -o filename filename.o
 
 to run the programs you've compiled enter
  $ ./filename
     nasm automatically adds execute rights to the program
 
-comments - comment your code! you can make the end of line a comment by using '; ex:
- CODE_WORKING ; COMMENT CODE_NOT_WORKING
-;COMMENT
- CODE_WORKING
+If you write assembly code (or any other programming language) you should comment your code! This will help you or
+other who will look through your program to understand what is happening.
+Imagine writing a program that does it's job, but after two months it breaks down. Now you have to sit through the
+source code but don't remember what any of it did. That's where your comments come in.
+In NASM comments are line-based meaning if you put the special comment character (a ; (semicolon) in NASM)on one
+line everything to the right of that semicolon in that line will be ignored by the compiler and linker.
 
-stack - continuous area of memory addressable for special registers, in RAM afaik
+visual example :
 
-sections - every assembly program consists of these three sections (even if you don't use one explicitly)
-    .data - used for declaring initialized data or constants
-    .bss  - used for declaring uninitialized variables
-    .text - used for code (all code goes here)
+CODE_WORKING ; CODE_NOT_WORKING
+;CODE_NOT_WORKING
+CODE_WORKING
+
+
+In assembly everything is done in registers. You can imagine these being small spaces inside of your CPU which will
+store very small amounts of data but are extremely fast. A x64_86 CPU will have more registers than a x86 CPU.
+This is called the architecture. All modern CPUs are x64_86 but need a 64bit operating system in order to leverage
+the additional registers. This tutorial is primarily going to use x86 registers, but you can write your code in
+64bit NASM if you want.
 
 get 64bit syscalls here:
 http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
@@ -62,6 +76,18 @@ important registers when using 32bit syntax:
  esi - 4th
  edi - 5th
 
+If you want to do anything that isn't covered by the base syntax of NASM
+(docs available here: http://www.nasm.us/xdoc/2.12.02/nasmdoc.pdf) then you will need to perform a syscall. These
+are actions performed by the operating system kernel, the base of your os. Each syscall has a different number
+associated with it called OPCODE. You can look up the OPCODEs and the arguments each syscall needs in the links
+provided above.
+
+
+sections - every assembly program consists of these three sections (even if you don't use one explicitly)
+    .data - used for declaring initialized data or constants
+    .bss  - used for declaring uninitialized variables
+    .text - used for code (all code goes here)
+
 data types
  name           size in bytes   size in bits    abbreviation	uninitialized abbr.
  byte           1               8               db		resb
@@ -75,6 +101,8 @@ data types
 
 while db, dw, dd, dq, dt, do, dy and dz are used for declaring initialized data,
       resb, resw, resd, resq, rest, reso, resy and resz are used for declaring uninitialized variables
+
+some syntax for both x64_86 and x86 NASM :
 
 incbin - includes external binary files
 
@@ -133,9 +161,10 @@ exit:
  syscall
 -------------------
 
-that's the most important things to get started done!
-either try writing your own code, look at the following more advanced notes
-or go to the individual lessons in the respective directories.
+That's the most important things to get started done!
+Either try writing your own code, look at the following more advanced notes
+Or go to the individual lessons in the respective directories.
+NOTE: The following notes all use the x64_86 sysntax!
 
 stack is a special region in the memory that operates on the lifo principle (Last Input, First Output)
 
