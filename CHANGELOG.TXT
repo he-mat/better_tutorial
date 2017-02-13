@@ -26,6 +26,7 @@ CHANGELOG:
 -wrote lesson 9
 -wrote lesson 10
 -I am only going to write the expected output if something is unexpected (does that make sense? look at lesson_10)
+-wrote lesson 11, updated functions.asm
 
 TODO:
 -write the next lesson
