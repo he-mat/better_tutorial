@@ -22,5 +22,10 @@ CHANGELOG:
 -wrote lesson 8
 -updated notes for better readability (now contains whole senteces, and less typos!)
 
+13.02
+-wrote lesson 9
+-wrote lesson 10
+-I am only going to write the expected output if something is unexpected (does that make sense? look at lesson_10)
+
 TODO:
 -write the next lesson
