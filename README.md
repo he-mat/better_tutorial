@@ -1,6 +1,6 @@
 ## better_tutorial
 
->in comparison to the first tutorial that I wrote and never published, because it wasn't any good.
+>compared to the first tutorial I wrote, which was basically just notes.
 
 
 ## Synopsis
