@@ -1,0 +1,33 @@
+COUNT TO 10 (ITOA)
+
+So why did our program from lesson 10 print out a colon character instead of the number 10? Well let's have a look
+at our ASCII table. We can see that the colon character has a ASCII value of 58. We were adding 48 to our integers
+to convert them to thei ASCII string representation so instead of passing SYS_WRITE the value "58" to print 10 (ten)
+we actually need to pass the ASCII value for the number 1 followed by the ASCII value for the number 0. Passing
+SYS_WRITE "4948" is the correct string representation for the number 10. So we can't just simply ADD 48 to our
+numbers to convert them, we first have to devide them by 10 because each place value needs to be converted
+individually.
+
+We will write 2 new subroutines in this lesson - "iprint" and "iprintLF". These function will be used when we want
+to print ASCII string representations of numbers. We achieve this by passing the number in EAX. We then initialise
+a counter in ECX. We will repeatedly divide the number by 10 and each time convert the remainder to a string by
+adding 48. We will then PUSH this ontothe stack for later use. Once we can no longer devide the number by 10 we will
+enter our second loop. In this loop we will print the now converted string representations from the stack and POP
+them off. Popping them off the stack moves ESP forward to the next item on the stack. Each time we print a value we
+will decrease our counter ECX. Once all numbers have been converted and printed we will return to our program.
+
+The DIV and IDIV instructions work by dividing whatever is in EAX by the value passed to the instruction. The
+quotient part of the value is left in EAX and the remainder part is put into EDX (originally called the data
+register).
+
+For example:
+ mov	eax, 10		; move 10 into EAX
+ mov	esi, 10		; move 10 into ESI
+ idiv	esi		; divide EAX by ESI (EAX will equal 1 and EDX will equal 0)
+ idiv	esi		; divide EAX by ESI (EAX will equal 0 and EDX will equal 1)
+
+This works in our case because these are integers, and when you divide a number by an even bigger number the
+qoutient in EAX is 0 and the remainder is the number itself. This is because the number devides zero times leaving
+the original value as the remainder in EDX.
+
+NOTE: In this lesson we changed the functions.asm!
