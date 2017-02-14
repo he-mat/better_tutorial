@@ -29,7 +29,9 @@ CHANGELOG:
 -wrote lesson 11, updated functions.asm
 
 14.02
+-wrote lesson 13
 -wrote lesson 14
+-wrote lesson 15
 
 TODO:
 -write the next lesson
