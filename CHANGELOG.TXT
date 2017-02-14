@@ -28,5 +28,8 @@ CHANGELOG:
 -I am only going to write the expected output if something is unexpected (does that make sense? look at lesson_10)
 -wrote lesson 11, updated functions.asm
 
+14.02
+-wrote lesson 14
+
 TODO:
 -write the next lesson
