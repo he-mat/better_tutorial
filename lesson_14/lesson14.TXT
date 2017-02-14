@@ -1,0 +1,7 @@
+CALCULATOR - MULTIPLICATION
+
+In this program we will be multiplying the value in the register EBX by the value in the register EAX. Firstly we
+load EAX and EBX with integers in the same way as in lesson 12. The only difference is we will be using the MUL
+instruction to perform our multiplication logic. The MUL instruction is different from many instructions in NASM in
+that it only accepts one further argument. The MUL instruction always multiplies EAX by whatever value gets passed
+to it and stores the result in EAX.
