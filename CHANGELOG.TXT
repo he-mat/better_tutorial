@@ -33,5 +33,8 @@ CHANGELOG:
 -wrote lesson 14
 -wrote lesson 15
 
+15.02
+-started lesson 16
+
 TODO:
 -write the next lesson
