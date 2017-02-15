@@ -63,4 +63,5 @@ fi
 $ exec bash
 ```
 - done!
+
 Now you can use the two scripts from anywhere! Just enter compile -h for first time help.
