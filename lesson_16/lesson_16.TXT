@@ -1,0 +1,30 @@
+CALCULATOR (ATOI)
+
+Our program will take several command line arguments and ADD them together printing our the result in the terminal
+
+Our program begins by using the POP instruction to get the number of passed arguments off the stack. This value is
+stored in ECX (originally called the counting register). It will then loop through these arguments popping each one
+off the stack and performing our addition logic. As we know, arguments passed via the command line are received by
+our program as strings. Before we can ADD the arguments together we will need to convert them to integers; otherwise
+our result will not be correct. We do this by calling our ASCII to Integer function (ATOI). This function will
+convert the ASCII value into an integer and place the result in EAX. We can then ADD this value to EDX (originally
+called the data register) where we will store the result of our additions. If the value passed to atoi is not an
+ASCII representation of an integer our function will return zero instead. When all arguments have been converted
+and added together we will print our the result and call our quit function.
+
+Converting an ASCII string into an integer value is not a trivial task. We know how to convert an integer to an
+ASCII string so the process should essentailly work in reverse. Firstly we take the address pf the string and move
+it into ESI (originally called the source register). We will then move along the string byte by byte (think of each
+byte as  being a single digit or decimal placeholder). For each digit we will check of its value is between 48 and
+57 (ASCII values for the digits 0-9). We will also check of the value if a linefeed or null terminating byte meaning
+we have reached the end of the string.
+
+Oce we have performed all these checks and determined that the byte can be converted to an integer we'll perform the
+program logic. We will subtract 48 from the value - converting the ASCII value to its decimal equivalent. We will
+then ADD this value to EAX (the general purpose register that will store our result). We will then multiply EAX by
+10 as each byte represents a decimal placeholder and continue the loop.
+
+When all bytes have been converted we need to do one last thing before we return the result. The last digit of any
+number represents a single unit (not a multiple of 10) so we have multiplied our result one too many times. We simply
+divide it by 10 once to correct this and then return.
+
