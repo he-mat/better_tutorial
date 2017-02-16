@@ -1,0 +1,15 @@
+FIZZBUZZ
+
+If you've done some programming tutorials in the past you probably have heard about fizzbuzz. The gist of it is
+simple: it's a game to teach kids division. You count from 1 to 100 replacing any number divisible by 3 with the
+word "fizz" and any number divisible by 5 "buzz". Numbers that are both divisible by 3 and 5 are replaced by the
+word "fizzbuzz". This childrens game has also become an interview screening question for programming jobs since you
+can easily discover candidates who can't construct a simple logic gate.
+
+There are a number of code solutions to this simple game and some languages offer very trivial and elegant
+solutions. Depending on how you choose to solve it, the solution almost always involves an if statement and possibly
+an else statement depending wether you choose to exploit the mathematical property that anything divisible by 3 & 5
+would also be divisible by 3 * 5. Being that this is an assembly language tutorial we will provide a solution that
+involves a structure of two cascading if statements to print the words "fizz" and/or "buzz" and an else statement
+in case these fail, to print the integer as an ASCII value. Each itereation of our loop will then print a line feed.
+Once we reach 100 we call our program exit function.
