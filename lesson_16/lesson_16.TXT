@@ -28,3 +28,17 @@ When all bytes have been converted we need to do one last thing before we return
 number represents a single unit (not a multiple of 10) so we have multiplied our result one too many times. We simply
 divide it by 10 once to correct this and then return.
 
+You may notice that the atio function references the BL register. So far in these tutorials we have been exclusively
+using 32bit registers. These 32bit general purpose registers contain segments of memory that can also be referenced.
+These segments are available in 16bit and 8bit. We wanted a single byte (8bits) because a byte is the size of memory
+that is required to store a single ASCII character. If we used a larger memory size we would have copied 8 bits of
+data into 32bits of space leaving us with "rubbish" bits - because only the first 8 bits would be meaningful for our
+calculation.
+
+The EBX register is 32bit. EBXs 16bit segment is referenced as BX. BX contains the 8bit segments BL and BH (lower
+and higher bits). We wanted the first 8 bits (lower bits) of EBX and so we referenced that storage area by using BL.
+
+Almost every assembly language tutorial begins with history of the registers, their names and their sizes. These
+tutorials however were written to privide a foundation in NASM by first writing code and then understanding the
+theory. The full story about the size of the registers, their history and importance are beyond the scope of this
+tutorial but we will return to that story later lessons.

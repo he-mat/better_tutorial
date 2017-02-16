@@ -1,4 +1,44 @@
 ;------------------
+; int atoi(Integer number)
+; ASCII to integer function (atoi)
+atoi:
+ push	ebx		; preserve EBX, ECX, EDX, ESI on the stack
+ push	ecx
+ push	edx
+ push	esi
+ mov	esi, eax	; move pointer in EAX into ESI (our number to convert)
+ mov	eax, 0		; initialize EAX and ECX with decimal 0
+ mov	ecx, 0
+
+ .multiplyloop:
+  xor	ebx, ebx	; resets both lower and upper bytes of EBX to be 0
+  mov	bl, [esi+ecx]	; move a single byte into EBXs registers lower half
+  cmp	bl, 48		; compare EBX lower half against ASCII value 48 (character '0')
+  jl	.finished	; jump if less than to label ".finished"
+  cmp	bl, 57		; compare EBX lower half against ASCII value 57 (character '9')
+  jg	.finished	; jump if greater than to label ".finished"
+  cmp	bl, 10		; compare EBX lower half against ASCII value 10 (linefeed character)
+  je	.finished	; jump if equal to label ".finished"
+  cmp	bl, 0		; compare EBX lower half against ASCII value 0 (NULL character, the terminating bit)
+  jz	.finished	; jump if zero to label ".finished"
+
+  sub	bl, 48		; convert EBXs lower half to decimal representation
+  add	eax, ebx	; add EBX to our integer value in EAX
+  mov	ebx, 10		; move decimal value 10 into EBX
+  mul	ebx		; multiply EAX by EBX to get place value
+  inc	ecx		; increment ECX (our counter register)
+  jmp	.multiplyloop	; continue our loop
+
+ .finished:
+  mov	ebx, 10
+  div	ebx		; divide EAX by EBX (10)
+  pop	esi		; restore all previous values
+  pop	edx
+  pop	ecx
+  pop	ebx
+  ret
+
+;------------------
 ; void iprint(Integer number)
 ; Integer printing function (itoa)
 iprint:
