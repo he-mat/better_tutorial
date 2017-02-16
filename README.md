@@ -41,8 +41,13 @@ I wanted to create this project because I wanted to learn Assembly and thought t
 
 ## Installation
 
-Just copy this project on you PC and start reading the notes. After about half of it you can start doing the lessons.
-You can do this by either clicking the green button at the top right hand side and downloading as a zip or directly clone the project with the ```git clone https://github.com/he-mat/better_tutorial.git``` command into your working directory.
+Just copy this project to your PC and start reading the notes.
+The easiest way to do this is with git:
+```bash
+git clone https://github.com/he-mat/better_tutorial.git
+```
+This command will download a directory called "better_tutorial" to your current directory.
+It is recommended that you start by reading the notes.TXT file, though you could directly start with the lessons.
 
 If you want to compile and link your programs with ease, follow these steps:
 - create the directory /bin/scripts
@@ -53,9 +58,10 @@ if [ -d "/bin/scripts" ]; then
   PATH="$PATH:/bin/scripts/"
 fi
 ```
-- enter 
+- enter this to restart bash:
 ```bash
 $ exec bash
 ```
 - done!
+
 Now you can use the two scripts from anywhere! Just enter compile -h for first time help.
