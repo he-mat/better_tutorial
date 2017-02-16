@@ -1,0 +1,22 @@
+EXECUTE COMMAND
+
+The EXEC family of function replace the currently running process with a new process, that executes the command you
+specified when calling it. We will be using the SYS_EXECVE function in this lesson to replace our programs running
+process with a new process that will execute the linux program /bin/echo to print our "Hello World!".
+
+The naming convention used for this family of functions is exec (execute) followed by one or more of the following
+letters.
+E - an array of pointers to environment variables is explicitly passed to the new precess image
+L - commandline arguments are passed individually to the function
+P - uses the PATH environment variable to find the file names in the path argument to be executed
+V - commandline arugments are passed to the function as an array of pointers
+
+The V and E at the end of our function name means we will need to pass our arguments in the following format:
+The first arugment is a string containing the command to execute, then an array of arguments to pass to that command
+and then another array of environment variables that the new process will use. As we are calling a simple command we
+won't pass any special environment variables to the new process and instead will pass 0h (null).
+
+Both the command arguments and the environment arguements need to be passed as an array of pointers. That's why we
+define our strings first and then define a simple null-terminated struct (array) of the variable names. This is then
+passed to SYS_EXECUTE. We call the function and the process is replaced by our command and output is returned to the
+terminal.
