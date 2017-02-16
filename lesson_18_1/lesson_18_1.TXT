@@ -1,0 +1,7 @@
+FIZZBUZZ WITH USER INPUT
+
+In lesson 18 we've written a program that counts numbers until 100 and prints out "Fizz" when the number is
+divisible by 3, "Buzz" when the number is divisible by 5, "FizzBuzz" when disible by both 3 and 5 or the number
+itself if neither. Now we're going to change the code so that the user can determin how far the program should
+count. To do this we will have to create a .bss section again, store an unitialized variable in there and write to
+it at the start of the program.
