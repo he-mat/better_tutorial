@@ -58,7 +58,7 @@ if [ -d "/bin/scripts" ]; then
   PATH="$PATH:/bin/scripts/"
 fi
 ```
-- enter 
+- enter this to restart bash:
 ```bash
 $ exec bash
 ```
