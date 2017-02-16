@@ -1,0 +1,22 @@
+NAMESPACE
+
+Namespace is a necessary construct in any software project that involves a codebase that is larger than a few simple
+functions. Namespace provides scope to your identifiers and allows you to reuse naming conventions to make your code
+more readable and maintainable. In assembly language where subroutines are identified by global labels, namespace
+can be achieved by using local labels.
+
+Up until the last lesson we have been using global labels exclusively. This means that blocks of logic essentially
+perform the same task needed a label with an unique identifier. A good example would be our finished labels. These
+were global in scope, meaning when we needed to break out of a loop in one function we could jump to a "finished"
+label. But if we needed to break out of a loop in a different function we would need to name this same task
+something different, like calling it "done" or "continue". Being able to reuse the label "finished" would mean that
+someone reading the code would know that these blokc sof logic perform almost the same task.
+
+Local labels are prepended with a "." at the beginning of their name, for example ".finished". You may have noticed
+them appearing as our code base in functions.asm grew. A local label is given the namespace of the first global
+label above it. You can jump to a local label by using the JMP instruction and the compiler will calculate which
+local label you are referencing by determining in what scope (based on above global labels) the instruction was
+called.
+
+NOTE: I changed the functions.asm file to use namespaces as well. If I wouldn't've done that, the program would not
+be able to compile due to the compiler not knowing which finished label to go to.
