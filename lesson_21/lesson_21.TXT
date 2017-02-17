@@ -1,0 +1,13 @@
+TELLING THE TIME
+
+Generating a unix timestamp in NASM is easy witht he SYS_TIME function of the linux kernel. Simply pass OPCOPDE 13
+to the kernel with no arguments and you are returned the UNIX EPOCH in the EAX register.
+That is the number of seconds that have elapsed since Jan, 1st 1970 UTC.
+
+NOTE:	This is the last lesson in this tutorial, and as you might have noticed since lesson 19 there isn't much
+	new, just repetition. I hope you had fun writing some NASM x86 and that my tutorial helped you on your way.
+	If you're still thirsty for more there is the official NASM documentation and the kernel OPCODE list.
+
+NASM doc. :	http://www.nasm.us/xdoc/2.12.02/nasmdoc.pdf
+x86 OPCODEs:	http://syscalls.kernelgrok.com/
+x86_64 OPCODEs:	http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
