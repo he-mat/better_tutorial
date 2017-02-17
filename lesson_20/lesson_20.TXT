@@ -1,0 +1,11 @@
+PROCESS FORKING
+
+I this lesson we will use SYS_FORK to create a new process that duplicates our current process. SYS_FORK takes no
+arguments - you can just call fork and the new process is created. Both processes run concurrently. We can test the
+return value (in EAX) to test wether we are currently in the parent or child process. The parent process return a
+non-negative, non-zero integer. In the child process EAX is zero. This can be used to branch you logic between the
+parent and child.
+
+In our program we will exploit this fact to print out different messages in each process.
+
+NOTE: Each process is responsible for safely exiting.
