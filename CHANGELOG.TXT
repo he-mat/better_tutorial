@@ -1,4 +1,4 @@
-CHANGELOG:
+HANGELOG:
 
 01.02
 -started using the CHANGELOG
@@ -36,5 +36,16 @@ CHANGELOG:
 15.02
 -started lesson 16
 
+16.02
+-finished lesson 16
+-added lesson 17
+-added lesson 18
+-added lesson 19
+
+17.02
+-added lesson 20
+-added lesson 21
+-v1 is done (initial release)
+
 TODO:
--write the next lesson
+-change wording, make it more readable/accesible
