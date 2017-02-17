@@ -11,3 +11,4 @@ NOTE:	This is the last lesson in this tutorial, and as you might have noticed si
 NASM doc. :	http://www.nasm.us/xdoc/2.12.02/nasmdoc.pdf
 x86 OPCODEs:	http://syscalls.kernelgrok.com/
 x86_64 OPCODEs:	http://blog.rchapman.org/posts/Linux_System_Call_Table_for_x86_64/
+ASCII table:	http://www.asciitable.com/
